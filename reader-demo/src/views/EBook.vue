@@ -21,6 +21,13 @@
              :fontSizeList="fontSizeList"
              :defaultFontSize="defaultFontSize"
              @setFontSize="setFontSize"
+             :bookAvailable="bookAvailable"
+             :defaultTheme="defaultTheme"
+             :navigation="navigation"
+             :themeList="themeList"
+             @jumpTo="jumpTo"
+             @onProgressChange="onProgressChange"
+             @setTheme="setTheme"
              ref="menuBar"></MenuBar>
   </div>
 </template>
@@ -40,7 +47,9 @@ export default {
   },
   data () {
     return {
+      // 标题栏和菜单栏是否出现
       isTitleAndMenuShow: false,
+      // 字号列表
       fontSizeList: [
         {fontSize: 12},
         {fontSize: 14},
@@ -50,7 +59,51 @@ export default {
         {fontSize: 22},
         {fontSize: 24}
       ],
-      defaultFontSize: 14
+      // 默认字号
+      defaultFontSize: 14,
+      // 主题数组
+      themeList: [
+        {
+          name: 'default',
+          style: {
+            body: {
+              'color': '#000',
+              'background': '#fff'
+            }
+          }
+        },
+        {
+          name: 'eye',
+          style: {
+            body: {
+              'color': '#000',
+              'background': '#cee'
+            }
+          }
+        },
+        {
+          name: 'night',
+          style: {
+            body: {
+              'color': '#fff',
+              'background': '#000'
+            }
+          }
+        },
+        {
+          name: 'gold',
+          style: {
+            body: {
+              'color': '#000',
+              'background': 'rgb(241, 236, 226)'
+            }
+          }
+        }
+      ],
+      // 默认主题序号
+      defaultTheme: 0,
+      // 图书是否处于可用状态
+      bookAvailable: false
     }
   },
   methods: {
@@ -73,6 +126,23 @@ export default {
 
       // 默认字体大小
       this.themes.fontSize(this.defaultFontSize)
+
+      // 注册主题: this.themes.register(name, style)
+      this.registerThemes()
+
+      // 切换主题:this.themes.select(name)
+      this.setTheme(this.defaultTheme)
+
+      // 通过epubjs的钩子函数生成Location对象，获取Location对象
+      this.book.ready.then(() => {
+        this.navigation = this.book.navigation
+
+        return this.book.locations.generate()
+      }).then(result => {
+        console.log(`result: ${result}`)
+        this.locations = this.book.locations
+        this.bookAvailable = true
+      })
     },
 
     // 翻页函数，上一页函数
@@ -108,6 +178,42 @@ export default {
       if (this.themes) {
         this.themes.fontSize(fontSize + 'px')
       }
+    },
+
+    // 注册主题
+    registerThemes () {
+      this.themeList.forEach(theme => {
+        this.themes.register(theme.name, theme.style)
+      })
+    },
+
+    // 设置主题
+    setTheme (index) {
+      this.themes.select(this.themeList[index].name)
+      this.defaultTheme = index
+      console.log(this.themes)
+    },
+
+    // 进度更改
+    onProgressChange (progress) {
+      const percentage = progress / 100
+      const location = percentage > 0 ? this.locations.cfiFromPercentage(percentage) : 0
+      this.rendition.display(location)
+    },
+
+    // 根据链接跳转到指定位置
+    jumpTo (href) {
+      this.rendition.display(href)
+      this.hideTitleAndMenu()
+    },
+
+    hideTitleAndMenu () {
+      // 隐藏标题栏和菜单栏
+      this.isTitleAndMenuShow = false
+      // 隐藏弹出的设置栏
+      this.$refs.menuBar.hideSetting()
+      // 隐藏目录
+      this.$refs.menuBar.hideContent()
     }
   },
   mounted () {
@@ -122,6 +228,7 @@ export default {
 
 .ebook {
   position: relative;
+
   .read-wrapper {
     .mask {
       position: absolute;
@@ -131,12 +238,15 @@ export default {
       display: flex;
       width: 100%;
       height: 100%;
+
       .left {
         flex: 0 0 px2rem(100);
       }
+
       .center {
         flex: 1;
       }
+
       .right {
         flex: 0 0 px2rem(100);
       }

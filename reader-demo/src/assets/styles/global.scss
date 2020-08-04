@@ -38,3 +38,11 @@ $fontSize: 37.5;
 .slide-down-enter, .slide-down-leave-to {
   transform: translate3d(0, -100%, 0);
 }
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
+.fade-enter-to, .fade-leave {
+  opacity: 1;
+}
