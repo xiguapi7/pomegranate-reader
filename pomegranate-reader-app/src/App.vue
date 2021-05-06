@@ -1,32 +1,42 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <span class="text">ABCDEFG</span>
   </div>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+// 添加rem, 自适应布局
+/*document.addEventListener('DOMContentLoaded', () => {
+  // 在DOM渲染完成后拿到HTML根元素, 修改上面的fontSize
+  const html = document.querySelector('html')
+  let fontSize = window.innerWidth / 10
+  // 给fontSize设置一个最大值
+  fontSize = fontSize > 50 ? 50 : fontSize
+  html.style.fontStyle = fontSize + 'px'
+})*/
 
-#nav {
-  padding: 30px;
-}
+import {mapGetters} from 'vuex'
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+export default {
+  name: 'App',
+  computed: {
+    // 展开store下的getters
+    ...mapGetters(['book'])
+  },
+  components: {},
+  mounted() {
+    this.$store.dispatch('setTest', 10).then(() => {
+      console.log('then: ', this.book)
+    })
+  }
 }
+</script>
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+<style scoped lang="scss">
+@import "assets/styles/global.scss";
+
+.text {
+  font-size: px2rem(20);
+  color: orange;
 }
 </style>
