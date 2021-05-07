@@ -1,42 +1,36 @@
 <template>
   <div id="app">
-    <span class="text">ABCDEFG</span>
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 // 添加rem, 自适应布局
-/*document.addEventListener('DOMContentLoaded', () => {
-  // 在DOM渲染完成后拿到HTML根元素, 修改上面的fontSize
-  const html = document.querySelector('html')
+document.addEventListener('DOMContentLoaded', () => {
   let fontSize = window.innerWidth / 10
   // 给fontSize设置一个最大值
   fontSize = fontSize > 50 ? 50 : fontSize
-  html.style.fontStyle = fontSize + 'px'
-})*/
-
-import {mapGetters} from 'vuex'
+  // 在DOM渲染完成后拿到HTML根元素, 修改上面的fontSize
+  const html = document.querySelector('html')
+  html.style.fontSize = fontSize + 'px'
+})
 
 export default {
-  name: 'App',
-  computed: {
-    // 展开store下的getters
-    ...mapGetters(['book'])
-  },
-  components: {},
-  mounted() {
-    this.$store.dispatch('setTest', 10).then(() => {
-      console.log('then: ', this.book)
-    })
-  }
+  name: 'App'
 }
 </script>
 
-<style scoped lang="scss">
-@import "assets/styles/global.scss";
+<style lang="scss">
+@import 'assets/styles/global';
 
-.text {
-  font-size: px2rem(20);
-  color: orange;
+#app {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  //background-color: orange;
+}
+
+* {
+  touch-action: pan-y;
 }
 </style>

@@ -1,11 +1,25 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
     {
+        path: '/',
+        redirect: '/ebook'
+    },
+    {
+        path: '/ebook',
+        component: () => import('../views/ebook/Index'),
+        children: [
+            {
+                // 动态路由
+                path: ':filename',
+                component: () => import('../components/ebook/EbookReader')
+            }
+        ]
+    }
+    /*{
         path: '/',
         name: 'Home',
         component: Home
@@ -16,8 +30,8 @@ const routes = [
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
-        component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-    }
+        component: () => import(/!* webpackChunkName: "about" *!/ '../views/About.vue')
+    }*/
 ]
 
 const router = new VueRouter({

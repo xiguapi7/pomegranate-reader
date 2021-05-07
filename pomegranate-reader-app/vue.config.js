@@ -14,7 +14,7 @@ module.exports = {
             .set('components', resolve('src/components'))
             .set('views', resolve('src/views'))
     },
-    css: {
+    /*css: {
         // 是否使用css分离插件 ExtractTextPlugin
         // extract: true,
         // 开启 CSS source maps?
@@ -35,5 +35,5 @@ module.exports = {
         },
         // 启用 CSS modules for all css / pre-processor files.
         requireModuleExtension: false
-    }
+    }*/
 }
