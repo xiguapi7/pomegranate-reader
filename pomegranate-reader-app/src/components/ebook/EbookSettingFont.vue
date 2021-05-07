@@ -33,16 +33,13 @@
   </transition>
 </template>
 
-<script>
-import {FONT_SIZE_LIST} from "../../utils/book";
+<script type="text/ecmascript-6">
 import {ebookMixin} from '../../utils/mixin'
 
 export default {
-  name: "EbookSettingFont",
   mixins: [ebookMixin],
   data() {
     return {
-      fontSizeList: FONT_SIZE_LIST,
       styleLeft: {},
       styleRight: {}
     }
@@ -71,17 +68,10 @@ export default {
         marginRight: (right + item - rightText) / 2 + 'px',
         fontSize: this.fontSizeList[this.fontSizeList.length - 1].fontSize + 'px'
       }
-    },
-    setFontSize(fontSize) {
-      this.currentBook.rendition.themes.fontSize(fontSize)
-    },
-    showFontFamilySetting() {
-      this.setFontFamilyVisible(true)
     }
   }
 }
 </script>
-
 
 <style lang="scss" rel="stylesheet/scss" scoped>
 @import "../../assets/styles/global";

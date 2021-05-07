@@ -18,34 +18,39 @@
       </div>
     </transition>
     <ebook-setting-font></ebook-setting-font>
-    <!--<ebook-setting-font-popup></ebook-setting-font-popup>-->
-    <!--<ebook-setting-theme></ebook-setting-theme>-->
-    <!--<ebook-setting-progress></ebook-setting-progress>-->
-    <!--<ebook-slide></ebook-slide>-->
-    <!--<ebook-speaking-icon></ebook-speaking-icon>-->
+    <ebook-setting-font-popup></ebook-setting-font-popup>
+    <ebook-setting-theme></ebook-setting-theme>
+    <ebook-setting-progress></ebook-setting-progress>
+    <ebook-slide></ebook-slide>
+    <ebook-speaking-icon></ebook-speaking-icon>
   </div>
 </template>
 
-<script>
-import {ebookMixin} from "../../utils/mixin";
-import EbookSettingFont from "./EbookSettingFont";
+<script type="text/ecmascript-6">
+import EbookSettingFont from './EbookSettingFont'
+import EbookSettingFontPopup from './EbookSettingFontPopup'
+import EbookSettingTheme from './EbookSettingTheme'
+import EbookSettingProgress from './EbookSettingProgress'
+import EbookSpeakingIcon from './EbookSpeakingIcon'
+
+import EbookSlide from './EbookSlide'
+import {ebookMixin} from '../../utils/mixin'
 
 export default {
-  name: "EbookMenu",
-  components: {
-    EbookSettingFont
-  },
   mixins: [ebookMixin],
-  methods: {
-    showSetting(key) {
-      this.setSettingVisible(key)
-    }
+  components: {
+    EbookSettingFontPopup,
+    EbookSlide,
+    EbookSettingProgress,
+    EbookSettingFont,
+    EbookSettingTheme,
+    EbookSpeakingIcon
   }
 }
 </script>
 
-<style scoped lang="scss" rel="stylesheet/scss">
-@import '../../assets/styles/global';
+<style lang="scss" rel="stylesheet/scss" scoped>
+@import "../../assets/styles/global";
 
 .menu-wrapper {
   position: absolute;

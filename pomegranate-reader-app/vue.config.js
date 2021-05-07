@@ -1,6 +1,17 @@
 const path = require('path')
 const resolve = dir => path.join(__dirname, dir)
 
+function mock(app, url, data) {
+    app.get(url, (request, response) => {
+        response.json(data)
+    })
+}
+
+const mockBookHomeData = require('./mock/bookHome')
+const mockBookShelfData = require('./mock/bookShelf')
+const mockBookList = require('./mock/bookCategoryList')
+const mockBookFlatList = require('./mock/bookFlatList')
+
 module.exports = {
     // 使用publicPath代替baseUrl作为基本路径
     publicPath: process.env.NODE_ENV === 'production' ? './' : '/',
@@ -36,4 +47,13 @@ module.exports = {
         // 启用 CSS modules for all css / pre-processor files.
         requireModuleExtension: false
     }*/
+
+    devServer: {
+        before(app) {
+            mock(app, '/book/home', mockBookHomeData)
+            mock(app, '/book/shelf', mockBookShelfData)
+            mock(app, '/book/list', mockBookList)
+            mock(app, '/book/flat-list', mockBookFlatList)
+        }
+    },
 }
