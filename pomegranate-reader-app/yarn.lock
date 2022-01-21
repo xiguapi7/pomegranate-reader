@@ -1558,6 +1558,11 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
+"@xmldom/xmldom@^0.7.5":
+  version "0.7.5"
+  resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.7.5.tgz#09fa51e356d07d0be200642b0e4f91d8e6dd408d"
+  integrity sha512-V3BIhmY36fXZ1OtVcI9W+FxQqxVLsPKcNjWigIaa81dLC9IolJl5Mt4Cvhmr0flUnjSpTdrbMTSbXqYqV5dT6A==
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.npm.taobao.org/@xtuc/ieee754/download/@xtuc/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -3466,12 +3471,13 @@ env-paths@^2.2.0:
   resolved "https://registry.npm.taobao.org/env-paths/download/env-paths-2.2.1.tgz#420399d416ce1fbe9bc0a07c62fa68d67fd0f8f2"
   integrity sha1-QgOZ1BbOH76bwKB8Yvpo1n/Q+PI=
 
-epubjs@^0.3.88:
-  version "0.3.88"
-  resolved "https://registry.npm.taobao.org/epubjs/download/epubjs-0.3.88.tgz#bc365e7e21893cf2d92717ce10927c1071275347"
-  integrity sha1-vDZefiGJPPLZJxfOEJJ8EHEnU0c=
+epubjs@^0.3.89:
+  version "0.3.89"
+  resolved "https://registry.yarnpkg.com/epubjs/-/epubjs-0.3.89.tgz#125c82d52095c859f284ddebb5cb17da37dde286"
+  integrity sha512-QQQ7f8vS/Wcabt0VU0mxR2AG+R1r+Kxr1aYmLjjHx8bgjxEm1aM3Zfr3WNPUiG6ZrhjpaFO547PODRSKC8lecA==
   dependencies:
     "@types/localforage" "0.0.34"
+    "@xmldom/xmldom" "^0.7.5"
     core-js "^3.6.5"
     event-emitter "^0.3.5"
     jszip "^3.4.0"
@@ -3479,7 +3485,6 @@ epubjs@^0.3.88:
     lodash "^4.17.15"
     marks-pane "^1.0.9"
     path-webpack "0.0.3"
-    xmldom "^0.3.0"
 
 errno@^0.1.3, errno@~0.1.7:
   version "0.1.8"
@@ -9121,11 +9126,6 @@ ws@^6.0.0, ws@^6.2.1:
   integrity sha1-RC/fCkftZPWbal2P8TD0dI7VJPs=
   dependencies:
     async-limiter "~1.0.0"
-
-xmldom@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npm.taobao.org/xmldom/download/xmldom-0.3.0.tgz#e625457f4300b5df9c2e1ecb776147ece47f3e5a"
-  integrity sha1-5iVFf0MAtd+cLh7Ld2FH7OR/Plo=
 
 xtend@^4.0.0, xtend@~4.0.1:
   version "4.0.2"
